@@ -1,20 +1,29 @@
-function kumite(playerTurn) {
+function kumite(command) {
 const punch = 'Punch';
 const kick =  'Kick';
 const throwMove = 'Throw';
 let computerMove = '';
+let rounds = 0;
+let playerPoints = 0;
+let npcPoints = 0;
+let isGameOver = false;
+let howToMove = false;
 
+while(!isGameOver){
+    console.log('The opponent is ready for the round')
+    console.log('Make your move : press (p) for punch, (k) for kick or (t) for throw')
+    playerTurn = command.shift(' ')
 if(playerTurn == 'p' || playerTurn == 'punch'){
     playerTurn = punch
-    console.log(`You clenched your fists with smile`)
+    console.log('You clenched your fists with smile')
 }else if(playerTurn == 'k' || playerTurn == 'kick'){
     playerTurn = kick
-    console.log(`You lean back ready to jump forward`)
+    console.log('You lean back ready to jump forward')
 }else if(playerTurn == 't' || playerTurn == 'throw'){
     playerTurn = throwMove
-    console.log(`You try to grab him`)
+    console.log('You try to grab him')
 }else{
-    console.log(`Wrong Move! Try again...`)
+    console.log('Wrong Move! Try again...')
 }
 let computerRandomNumber = Math.floor(Math.random() * 3) + 1;
 
@@ -30,26 +39,52 @@ switch(computerRandomNumber){
     break;
 }
 if(playerTurn === punch && computerMove === punch){
-    console.log(`Block. Draw`)
+    console.log('Block.')
 }else if(playerTurn === punch && computerMove === throwMove){
-    console.log(" The opponent applies an inverted facelock to you, then falls backward, driving the back of your head into the floor. You Lose!!!")
+    console.log('The opponent applies an inverted facelock to you, then falls backward, driving the back of your head into the floor.')
+    npcPoints++
 }else if(playerTurn === punch && computerMove === kick){
-    console.log(`Your fist landed on the opponent face. You Win!!!`)
+    console.log('Your fist landed on the opponent face.')
+    playerPoints++
 }else if(playerTurn === throwMove && computerMove === punch){
-    console.log("You grab your opponent by the neck, then quickly turns around and slams him into the ground. You Win !!!")
+    console.log('You grab your opponent by the neck, then quickly turns around and slams him into the ground.')
+    playerPoints++
 }else if(playerTurn === throwMove && computerMove === throwMove){
-    console.log("Both of you grab only the thin air. Awkward situation. Draw")
+    console.log('Both of you grab only the thin air. Awkward situation.')
 }else if(playerTurn === throwMove && computerMove === kick){
-    console.log("After dodging your attack, the opponent slides forward with a side kick to your's middle, knocking you away. You Lose!!!")
+    console.log('After dodging your attack, the opponent slides forward with a side kick to your\'s middle, knocking you away.')
+    npcPoints++
 }else if(playerTurn === kick && computerMove === punch){
-    console.log("The opponent is faster than you. He`s fist punch your stomach, before even lift your feet. You Lose!!!")
+    console.log('The opponent is faster than you. He\'s fist punch your stomach, before even lift your feet.')
+    npcPoints++
 }else if(playerTurn === kick && computerMove === throwMove){
-    console.log('You  deals a spinning balance kick to the opponent. You win!!!')
+    console.log('You  deals a spinning balance kick to the opponent.')
+    playerPoints++
 }else if(playerTurn === kick && computerMove === kick){
-    console.log("You jump over your opponent avoiding cutting-down kick. Draw")
+    console.log('You jump over your opponent avoiding cutting-down kick.')
 }else{
-    console.log("Unable to move, the opponent show you some mercy..... after some time....Read the instructions first")
+    console.log('Unable to move, the opponent show you some mercy..... after some time....Read the instructions first')
+    isGameOver = true;
+    let howToMove = true;
 }
+rounds ++
+if(rounds === 3){
+    isGameOver = true;
+}
+}
+if(howToMove){
+    console.log('Try again.Press (p) for punch, (k) for kick or (t) for throw')
+}else{
+    console.log('The Battle is Over')
+    if(playerPoints > npcPoints){
+        console.log('You Win!!!');    
+    }else if(playerPoints < npcPoints){
+        console.log('You loose!!!')
+    }else{
+        console.log('The fight is so boring and the crowd is not happy. The result is draw, but the shame is yours!!!')
+    }
+
 
 }
-kumite('t')
+}
+kumite(['t','p','k','p'])
