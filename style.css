@@ -1,0 +1,22 @@
+h1 {
+ text-align: center;
+ color: green;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 23px;
+    color: azure;
+}
+
+p.greenParagraph {
+    color: green;
+}
+
+p.lightParagraph {
+    color: rgb(68, 194, 68);
+}
+
+div.gray {
+    background-color: rgb(26, 24, 24);
+}
